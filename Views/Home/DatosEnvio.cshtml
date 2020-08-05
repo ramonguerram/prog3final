@@ -1,0 +1,34 @@
+﻿
+
+
+
+<h55>Click Para Completar Su Compra</h55>
+<div>
+    <div class="conta" >
+        <div class="row">
+            <div class="col-12">
+                            <form method="post"  action="https://www.sandbox.paypal.com/cgi-bin/webscr">
+
+                                   <input type="hidden" name="upload" value="1" />
+                                   <input type="hidden" name="return" value="http://localhost:44320" />
+                                   <input type="hidden" name="cmd" value="_cart" />
+                                   <input type="hidden" name="business" value="sb-hnuyg2687388@business.example.com" />
+
+                                   @for (int i = 0; i < ViewBag.CarroLength; i++)
+                                   {
+
+                                       <input type="hidden" name="@ViewBag.CarroPaypalData[i][0]" value="@ViewBag.Carrodata[i][3]" />
+                                       <input type="hidden" name="@ViewBag.CarroPaypalData[i][1]" value="@ViewBag.Carrodata[i][0]" />
+                                       <input type="hidden" name="@ViewBag.CarroPaypalData[i][2]" value="@ViewBag.Carrodata[i][6]" />
+                                       <input type="hidden" name="@ViewBag.CarroPaypalData[i][3]" value="@ViewBag.Carrodata[i][2]" />
+
+                                   }
+                                   <input type="submit" target="_blank" class="btn btn-primary" value="COMPLETAR COMPRA" />
+                             </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

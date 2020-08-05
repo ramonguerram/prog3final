@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewData["Title"] = "Carro";
+}
+
+<style>
+
+    .cantidadP {
+        justify-content: center;
+        align-content: center;
+    }
+
+        .cantidadP span {
+            margin: 5px 18px 0 18px;
+        }
+
+    button[class*=btn] {
+        width: 30px;
+        height: 30px;
+        background-color: #E1E8EE;
+        border-radius: 6px;
+        border: none;
+        outlinr: none;
+        cursor: pointer;
+    }
+
+    .product {
+        border: 1px black solid;
+        padding: 10px 40px 10px 40px;
+    }
+
+    .imgclass img {
+        width: 80px;
+        height: auto;
+    }
+
+
+
+    .conta div.product {
+        margin: 10px 10px 10px 10px;
+    }
+
+    div.search-box input.search-txt {
+        border: 3px rgba(0, 0, 0 0.2) solid;
+        border-radius: 15px;
+        border: none;
+        width: 50%;
+        background-color: #2d3436;
+    }
+
+    div.cantidad input {
+        width: 50%
+    }
+
+    /*############ Slider ############*/
+
+    div.carousel-item img {
+        width: 800px;
+        height: 400px;
+    }
+
+    div.carousel {
+        margin-bottom: 10px;
+    }
+    /*######## Search Box ###########*/
+
+    .search-box {
+        color: #ecf0f1;
+        display: flex;
+        background: none;
+        margin: auto;
+        width: 100%;
+        background-color: #2d3436;
+        margin-bottom: 30px;
+    }
+
+    .search-txt {
+        border: none;
+        color: white;
+        outline: none;
+    }
+
+    .search-btn {
+        padding: 15px;
+        background-color: #34495e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+    }
+
+    .search-category {
+        color: #ecf0f1;
+        margin-left: 15%;
+        outline: none;
+        background-color: #34495e;
+    }
+</style>
+
+
+
+<h1>Carro</h1>
+<div>
+    <div class="conta  shadow-lg p-3 mb-5 bg-white rounded">
+        <div class="row">
+            <div class="col-12">
+                @for (int i = 0; i < ViewBag.CarroLength; i++)
+                {
+                    <form method="post">
+                        <div class="product align-items-center" style="min-width:250px;">
+                            <div class="datos row">
+                                <div class="imgclass col align-self-center">
+                                    <img src="@ViewBag.Carrodata[i][4]">
+                                </div>
+                                <input type="hidden" id="productoid" value="@ViewBag.Carrodata[i][0]" name="id" />
+                                <div class="col align-self-center"><h6>@ViewBag.Carrodata[i][3]</h6></div>
+                                <div class="col align-self-center"><h6>x @ViewBag.Carrodata[i][2]</h6></div>
+                                <div class="col align-self-center"><p>@ViewBag.Carrodata[i][5]</p></div>
+                                <div class="col align-self-center"><p>RD$@ViewBag.Carrodata[i][6]</p></div>
+
+
+                                <input type="hidden" id="productoid" value="@ViewBag.Carrodata[i][1]" name="idProducto" />
+                                <input type="hidden" id="cantidadid" value="@ViewBag.Carrodata[i][2]" name="cantidad" />
+
+                                <div class="cantidadP  class=" col-1"">
+                                    <span class="text-center text-black-50" id="count" name="cantidad"></span>
+                                </div>
+                                <div class="align-self-center">
+                                    <input class="boton btn-secondary  align-self-center" asp-action="Borrar" type="submit" value="Borrar">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                }
+
+                <div class="d-flex flex flex-wrap" style="padding-right:8px;">
+                    <div id="paypal-button-container"></div>
+                    <div style="padding-left:12px;">
+
+                        <label for="total">Total: $</label>
+                        <span>@ViewBag.Total</span>
+
+                       
+                    <form asp-action="DetallesCompra">
+                        <input type="submit" class="btn btn-primary" value="COMPRAR" />
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

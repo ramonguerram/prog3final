@@ -1,0 +1,44 @@
+﻿@model proyectoFinalProgramacion3.Models.Envios
+
+@{
+    ViewData["Title"] = "ListadoDePedido";
+}
+
+<h1 class="text-center">ListadoDePedido</h1>
+
+<div class="container">
+    <div class="row flex-column">
+        <div class="row flex-wrap">
+            @for (int i = 0; i < ViewBag.ListadoDataLength; i++)
+            {
+                <form method="post">
+                    <div class="align-items-center">
+                        <div class="shadow p-3 mb-5 bg-white rounded">
+                            <div class="col align-self-center"><h6>@ViewBag.ListadoData[i][0]</h6></div>
+                            <div class="col align-self-center"><h6>@ViewBag.ListadoData[i][1]</h6></div>
+                            <div class="col align-self-center"><h6>@ViewBag.ListadoData[i][2]</h6></div>
+                            <div class="col align-self-center"><h6>@ViewBag.ListadoData[i][3]</h6></div>
+                            <div class="col align-self-center"><h6>@ViewBag.ListadoData[i][4]</h6></div>
+                            <div class="col align-self-center"><h6>@ViewBag.ListadoData[i][5]</h6></div>
+
+                            <input type="hidden" name="email" value="@ViewBag.ListadoData[i][5]" />
+                            <input type="hidden" name="latitud" value="@ViewBag.ListadoData[i][2]" />
+                            <input type="hidden" name="longitud" value="@ViewBag.ListadoData[i][3]" />
+
+                            <div class="align-self-center">
+                                <input class="boton btn-secondary  align-self-center" asp-action="DetallesPedido" type="submit" value="Ver">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+    
+</div>
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

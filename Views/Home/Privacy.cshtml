@@ -1,0 +1,156 @@
+﻿<html>
+<head>
+    
+    <script src="https://kit.fontawesome.com/3a2a790c9e.js" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <style>
+
+        .cantidadP{
+            
+            justify-content:center;
+            align-content:center;
+        }
+        .cantidadP span{
+            margin:5px 18px 0 18px;
+
+        }
+        button[class*=btn] {
+            width: 30px;
+            height: 30px;
+            background-color: #E1E8EE;
+            border-radius: 6px;
+            border: none;
+            outlinr:none;
+            cursor: pointer;
+        }
+        .product {
+            border: 1px black solid;
+            padding: 10px 40px 10px 40px;
+        }
+
+        .imgclass img {
+            width: 80px;
+            height: auto;
+        }
+
+      
+        .conta div.product {
+                margin: 10px 0px 10px 20px;
+         }
+
+        div.search-box input.search-txt {
+            border: 3px rgba(0, 0, 0 0.2) solid;
+            border-radius: 15px;
+            border: none;
+            width: 50%;
+            background-color: #2d3436;
+        }
+
+        div.cantidad input{
+            width:50%
+        }
+
+        /*############ Slider ############*/
+        
+        div.carousel-item img{
+            width:800px;
+            height:400px;
+        }
+        div.carousel{
+            margin-bottom: 10px;
+        }
+        /*######## Search Box ###########*/
+
+        .search-box {
+            color: #ecf0f1;
+            display: flex;
+            background: none;
+            margin: auto;
+            width: 100%;
+            background-color: #2d3436;
+            margin-bottom: 30px;
+        }
+
+        .search-txt {
+            border: none;
+            color: white;
+            outline: none;
+        }
+
+        .search-btn {
+            padding: 15px;
+            background-color: #34495e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            outline: none;
+        }
+
+        .search-category {
+            color: #ecf0f1;
+            margin-left: 15%;
+            outline: none;
+            background-color: #34495e;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <h1 class="text-center jumbotron">LISTA DE PRODUCTOS</h1>
+
+   
+    <div class="container flex-wrap" style="width:100%">
+        <div class="conta shadow mb-5 bg-white rounded">
+            <div class="row">
+                <div class="d-flex flex-wrap">
+                    
+                         @for (int i = 0; i < ViewBag.Length; i++) {
+                       
+                                <form method="post">
+                                    <div class="product align-items-center shadow-sm p-3 mb-5 bg-white rounded" style="min-width:250px;">
+                                        <div>
+                                            <div class="imgclass text-center">
+                                                <img src="@ViewBag.data[i][4]">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="datos text-center">
+
+                                                <input type="hidden" id="productoid" value="@ViewBag.data[i][0]" name="id" />
+                                                <input type="hidden" id="productonombre" value="@ViewBag.data[i][1]" name="nombre" />
+                                                <input type="hidden" id="productodprecio" value="@ViewBag.data[i][2]" name="precio" />
+                                                <input type="hidden" id="productoimagen" value="@ViewBag.data[i][4]" name="imagen" />
+                                                <input type="hidden" id="productodesripcion" value="@ViewBag.data[i][3]" name="descripcion" />
+
+                                                <div><h6>@ViewBag.data[i][1]</h6></div>
+                                                <div><p>RD$@ViewBag.data[i][2]</p></div>
+                                                <div><p>Descripcion</p></div>
+                                                <div><p>@ViewBag.data[i][3]</p></div>
+                                    
+                                                <div class="cantidadP d-flex">
+                                                    <input class="text-center text-black-50" id="count" name="cantidad" value="1" />
+                                                </div>
+                                                <div>
+                                                    <input asp-action="Agregar" class="boton btn-dark" type="submit" value="Agregar">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form> 
+                         } 
+                     
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+    </script>
+   
+</body>
+</html>
+

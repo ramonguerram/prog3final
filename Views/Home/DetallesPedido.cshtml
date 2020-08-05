@@ -1,0 +1,87 @@
+﻿
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
+</head>
+<h1 class="text-center">DetallesPedido</h1>
+
+    
+
+<div class="container">
+    <div class="row">
+        <div class="col-6 align-self-center">
+            <h5 class="text-center">Lista de Compra</h5>
+        </div>
+        <div class="col-6 align-self-center">
+            <h5 class="text-center">Localizacion De Envio</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div style="min-height:800px;" class="col-6 card pre-scrollable">
+            <div class="align-items-center">
+                <div class="row">
+                    <div class="col align-self-center"><h6>Nombre</h6></div>
+                    <div class="col align-self-center"><h6>Cantidad</h6></div>
+                    <div class="col align-self-center"><h6>Total</h6></div>
+                </div>
+            </div>
+
+            @for (int i = 0; i < ViewBag.PedidoDetallesLength; i++)
+            {
+                <hr />
+                <div class="align-items-center" style="padding:5px 0 5px 0;">
+                    <div class="row">
+                        <div class="col-4 align-self-center"><h6>@ViewBag.PedidoDetalles[i][0]</h6></div>
+                        <div class="col-4 align-self-center"><h6>@ViewBag.PedidoDetalles[i][1]</h6></div>
+                        <div class="col-4 align-self-center"><h6>@ViewBag.PedidoDetalles[i][2]</h6></div>
+                    </div>
+                </div>
+
+                <input type="hidden" id="latitud" value="@ViewBag.PedidoDetalles[i][3]" />
+                <input type="hidden" id="longitud" value="@ViewBag.PedidoDetalles[i][4]" />
+            }
+
+        </div>
+        <div id="map" class="map col-6" style="height:800px;"></div>
+    </div>
+</div>
+    
+
+
+</html>
+
+<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+<script type="text/javascript">
+    var latitud = Number(document.getElementById("latitud").value);
+    var longitud = Number(document.getElementById("longitud").value);
+    var map = new ol.Map({
+
+        target: 'map',
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
+        ],
+
+        view: view = new ol.View({
+
+            center: ol.proj.fromLonLat([latitud, longitud]),
+            zoom: 8
+        })
+    });
+
+    var layer = new ol.layer.Vector({
+        source: new ol.source.Vector({
+            features: [
+                new ol.Feature({
+                    geometry: new ol.geom.Point(ol.proj.fromLonLat([latitud, longitud]))
+                })
+            ]
+        })
+
+
+    });
+    map.addLayer(layer);
+</script>
